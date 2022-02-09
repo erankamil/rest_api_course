@@ -16,10 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.secret_key = "ek878"
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # change default endpoint from /auth to /login
 app.config['JWT_AUTH_URL_RULE'] = '/login'
@@ -43,5 +39,4 @@ api.add_resource(UserRegister, '/register')
 
 # only the file that we run get the name __main__, imports will not be with that name
 if __name__ == "__main__":
-    db.init_app(app)
     app.run(port=5000, debug=True)
